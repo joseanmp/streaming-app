@@ -2,16 +2,27 @@ const express     = require('express'),
       app         = express(),
       http        = require('http').Server(app),
       io          = require('socket.io')(http),
-      mongoose    = require('mongoose');
+      mongoose    = require('mongoose'),
+      bodyParser  = require('body-parser');
 
 
-const db          = mongoose.connect(),
-      port        = process.env.PORT || 3000;
+const db            = mongoose.connect('mongodb://localhost/streaming-app-db'),
+      port          = process.env.PORT || 3000,
+      Message       = require('./models/messageModel');
+      messageRouter = require('./routes/messageRoutes')(Message);
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use('/api/messages', messageRouter);
 
 app.use(express.static('client'));
 
 app.get('/', function(req,res){
   res.sendFile("index.html", {"root": "client"});
+});
+
+app.get('/', function(req,res){
+    res.send();
 });
 
 io.on('connection', function(socket){

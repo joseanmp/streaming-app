@@ -2,10 +2,20 @@
   "name": "streaming-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
   },
   "author": "Jose Antonio Moreno",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.9",
+    "body-parser": "^1.18.2",
+    "bower": "^1.8.2",
+    "express": "^4.16.2",
+    "jquery": "^3.3.1",
+    "mongoose": "^5.0.7",
+    "socket.io": "^2.0.4"
+  }
 }
